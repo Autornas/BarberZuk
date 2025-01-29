@@ -1,0 +1,32 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+.Nav{
+    padding: 10px;
+    display: flex;
+
+
+}
+.navHome
+{
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+.navAbout
+{
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+.navContact
+{
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
