@@ -1,17 +1,18 @@
-import styles from './Header.module.css';
-import Button from "../UI/Button";
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
 
-function Header() {   
-    return (
-        <div className={styles.header}>
-            <div className={styles.logo}></div>
-            <div className={styles.nav}>
-                <a className={styles.navHome} href="#">Home</a>
-                <a className={styles.navAbout} href="#">About</a>
-                <a className={styles.navContact} href="#">Contact</a>
-            </div>
-        </div>
-    );
+function Header() {
+  return (
+    <div className={styles.header}>
+      <div className={styles.logo}></div>
+      <div className={styles.nav}>
+        <Link className={styles.navHome} to="/">Home</Link>
+        <Link className={styles.navAbout} to="/about">About</Link>
+        <Link className={styles.navContact} to="/contact">Contact</Link>
+      </div>
+    </div>
+  );
 }
 
 export default Header;

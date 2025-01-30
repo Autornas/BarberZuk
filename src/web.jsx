@@ -1,5 +1,6 @@
-import Header from "./Components/Header/Header";
+import Header from "./Components/Header/Header.jsx";
 import Booking from "./Components/Booking/Booking";
+import Footer from "./Components/Footer/Footer";
 
 
 function Web() {
@@ -7,6 +8,7 @@ function Web() {
    <>
     <Header/>
     <Booking/>
+    <Footer/>
    </>
   );
 }
