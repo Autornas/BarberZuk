@@ -5,7 +5,7 @@ import styles from './HomeScreen.module.css';
 function HomeScreen() {
   return (
     <div className={styles.homeContainer}>
-      <h1>Welcome to Our App!</h1>
+      <h1>Welcome to BarberZuk!</h1>
       <div className={styles.buttonContainer}>
         <Link to="/login">
           <button className={styles.homeButton}>Login</button>
