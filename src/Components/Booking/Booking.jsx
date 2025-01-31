@@ -17,7 +17,7 @@ function BookingCalendar() {
     0
   ).getDate();
 
-  const availableHours = ["09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
+  const availableHours = [ "13:00 ", "14:00 ", "15:00 ", "16:00 "];
 
   const handleDateClick = (day) => {
     setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day));
