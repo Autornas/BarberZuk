@@ -5,7 +5,7 @@
   padding: 16px;
   max-width: 80%;
   margin: auto;
-  background-color: lightgray;
+  background-color: grey;
 }
 
 .calendarHeader {
@@ -25,4 +25,35 @@
 .selectedDate {
   background-color: black;
   color: white;
+}
+.timeModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.timeModal button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.timeModal button:hover {
+  background-color: #0056b3;
 }

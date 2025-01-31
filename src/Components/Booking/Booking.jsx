@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { format, addMonths, subMonths } from "date-fns";
-import styles from "./Booking.module.css"; 
+import styles from "./Booking.module.css";
 import Button from "../UI/Button.jsx";
 import Card from "../UI/Card.jsx";
 import CardContent from "../UI/CardContent.jsx";
@@ -8,6 +8,8 @@ import CardContent from "../UI/CardContent.jsx";
 function BookingCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [showTimes, setShowTimes] = useState(false);
 
   const daysInMonth = new Date(
     currentMonth.getFullYear(),
@@ -15,8 +17,16 @@ function BookingCalendar() {
     0
   ).getDate();
 
+  const availableHours = ["09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
+
   const handleDateClick = (day) => {
     setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day));
+    setShowTimes(true);
+  };
+
+  const handleTimeClick = (time) => {
+    setSelectedTime(time);
+    setShowTimes(false);
   };
 
   return (
@@ -43,6 +53,28 @@ function BookingCalendar() {
           </div>
         </CardContent>
       </Card>
+
+      {showTimes && (
+        <div className={styles.timeModal}>
+          <Card>
+            <CardContent>
+              <h3>Available times for {format(selectedDate, "MMMM dd")}:</h3>
+              <div className={styles.timeGrid}>
+                {availableHours.map((time, index) => (
+                  <Button key={index} onClick={() => handleTimeClick(time)}>
+                    {time}
+                  </Button>
+                ))}
+              </div>
+              <Button onClick={() => setShowTimes(false)}>Close</Button>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {selectedTime && (
+        <p>Selected time: {format(selectedDate, "MMMM dd, yyyy")} at {selectedTime}</p>
+      )}
     </div>
   );
 }
