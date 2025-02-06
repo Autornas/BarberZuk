@@ -82,7 +82,7 @@
 }
 
 .timeGrid button {
-  background-color: #444; /* Match the calendar button color */
+  background-color: #444; 
   color: white;
   border: 1px solid #555;
   padding: 10px;
@@ -93,11 +93,11 @@
 }
 
 .timeGrid button:hover {
-  background-color: #555; /* Slightly lighter gray on hover */
+  background-color: #555; 
 }
 
 .timeModal button {
-  background-color: #444; /* Match calendar button color */
+  background-color: #444; 
   color: white;
   border: 1px solid #555;
   padding: 10px;
@@ -108,5 +108,5 @@
 }
 
 .timeModal button:hover {
-  background-color: #555; /* Slightly lighter gray on hover */
+  background-color: #555; 
 }
