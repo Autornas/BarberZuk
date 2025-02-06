@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
-  max-width: 80%;
-  margin: auto;
-  background-color: grey;
+  padding: 20px;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #2e2e2e;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .calendarHeader {
@@ -14,46 +16,97 @@
   align-items: center;
   width: 100%;
   margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.calendarHeader button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.calendarHeader button:hover {
+  background-color: #555;
+}
+
+.dayLabels {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
 }
 
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+}
+
+.emptyCell {
+  visibility: hidden;
+}
+
+.calendarGrid button {
+  background-color: #444;
+  color: white;
+  border: 1px solid #555;
+  padding: 12px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.calendarGrid button:hover {
+  background-color: #555;
 }
 
 .selectedDate {
-  background-color: black;
-  color: white;
-}
-.timeModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  background-color: black !important;
+  color: white !important;
+  font-weight: bold;
+  border: 2px solid #777;
 }
 
-.timeGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 10px;
+.timeGrid button {
+  background-color: #444; /* Match the calendar button color */
+  color: white;
+  border: 1px solid #555;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.timeGrid button:hover {
+  background-color: #555; /* Slightly lighter gray on hover */
 }
 
 .timeModal button {
-  background-color: #007bff;
+  background-color: #444; /* Match calendar button color */
   color: white;
-  border: none;
+  border: 1px solid #555;
   padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
 }
 
 .timeModal button:hover {
-  background-color: #0056b3;
+  background-color: #555; /* Slightly lighter gray on hover */
 }

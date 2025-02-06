@@ -17,10 +17,18 @@ function BookingCalendar() {
     0
   ).getDate();
 
-  const availableHours = [ "13:00 ", "14:00 ", "15:00 ", "16:00 "];
+  const firstDayOfMonth = new Date(
+    currentMonth.getFullYear(),
+    currentMonth.getMonth(),
+    1
+  ).getDay();
+
+  const availableHours = ["13:00", "14:00", "15:00", "16:00"];
 
   const handleDateClick = (day) => {
-    setSelectedDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day));
+    setSelectedDate(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)
+    );
     setShowTimes(true);
   };
 
@@ -29,21 +37,48 @@ function BookingCalendar() {
     setShowTimes(false);
   };
 
+  const handleCloseModal = () => {
+    setShowTimes(false);
+    setSelectedDate(null); 
+  };
+
   return (
     <div className={styles.calendarContainer}>
       <Card>
         <CardContent>
           <div className={styles.calendarHeader}>
-            <Button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>&lt;</Button>
+            <Button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>
+              &lt;
+            </Button>
             <h2>{format(currentMonth, "MMMM yyyy")}</h2>
-            <Button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>&gt;</Button>
+            <Button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
+              &gt;
+            </Button>
           </div>
+
+          <div className={styles.dayLabels}>
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+              <div key={day} className={styles.dayLabel}>
+                {day}
+              </div>
+            ))}
+          </div>
+
           <div className={styles.calendarGrid}>
+
+            {Array.from({ length: firstDayOfMonth }).map((_, index) => (
+              <div key={`empty-${index}`} className={styles.emptyCell}></div>
+            ))}
+
             {[...Array(daysInMonth)].map((_, index) => (
               <Button
                 key={index}
                 className={
-                  selectedDate && selectedDate.getDate() === index + 1 ? styles.selectedDate : ""
+                  selectedDate &&
+                  selectedDate.getDate() === index + 1 &&
+                  selectedDate.getMonth() === currentMonth.getMonth()
+                    ? styles.selectedDate
+                    : ""
                 }
                 onClick={() => handleDateClick(index + 1)}
               >
@@ -66,14 +101,17 @@ function BookingCalendar() {
                   </Button>
                 ))}
               </div>
-              <Button onClick={() => setShowTimes(false)}>Close</Button>
+              <Button onClick={handleCloseModal}>Close</Button> 
             </CardContent>
           </Card>
         </div>
       )}
 
       {selectedTime && (
-        <p>Selected time: {format(selectedDate, "MMMM dd, yyyy")} at {selectedTime}</p>
+        <p>
+          Selected time: {format(selectedDate, "MMMM dd, yyyy")} at{" "}
+          {selectedTime}
+        </p>
       )}
     </div>
   );
