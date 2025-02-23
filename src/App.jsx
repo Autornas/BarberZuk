@@ -4,7 +4,7 @@ import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import RegisterScreen from "./pages/RegisterScreen/RegisterScreen";
 import HomeScreen from "./pages/HomeScreen/HomeScreen";
 import Web from "./web";
-import About from "./pages/About";
+import About from "./pages/AboutScreen/About";
 
 function App() {
   return (
