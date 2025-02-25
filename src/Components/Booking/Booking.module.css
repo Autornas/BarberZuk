@@ -112,7 +112,11 @@
 .timeModal button:hover {
   background-color: #555; 
 }
-.Available{
+.timeTitle {
   color: white;
 
+}
+.selectedDateTime
+{
+  color : white;
 }
