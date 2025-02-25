@@ -1,6 +1,6 @@
-import Header from "./Components/Header/Header.jsx";
+import Header from "./components/Header/Header.jsx";
 import Booking from "./Components/Booking/Booking";
-import Footer from "./Components/Footer/Footer.jsx";
+import Footer from "./components/Footer/Footer";
 
 
 function Web() {
