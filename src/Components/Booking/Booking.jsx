@@ -93,7 +93,7 @@ function BookingCalendar() {
         <div className={styles.timeModal}>
           <Card>
             <CardContent>
-              <h3>Available times for {format(selectedDate, "MMMM dd")}:</h3>
+              <h3 className={styles.Available}>Available times for {format(selectedDate, "MMMM dd")}:</h3>
               <div className={styles.timeGrid}>
                 {availableHours.map((time, index) => (
                   <Button key={index} onClick={() => handleTimeClick(time)}>

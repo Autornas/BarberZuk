@@ -105,8 +105,14 @@
   border-radius: 6px;
   font-size: 14px;
   transition: all 0.2s ease-in-out;
+  
+
 }
 
 .timeModal button:hover {
   background-color: #555; 
+}
+.Available{
+  color: white;
+
 }
