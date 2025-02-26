@@ -21,7 +21,7 @@ function BookingCalendar() {
     currentMonth.getFullYear(),
     currentMonth.getMonth(),
     1
-  ).getDay();
+  ).getDay() + 6 % 7; 
 
   const availableHours = ["13:00", "14:00", "15:00", "16:00"];
 
@@ -57,7 +57,7 @@ function BookingCalendar() {
           </div>
 
           <div className={styles.dayLabels}>
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            {["Pirm", "Antr", "Trec", "ketv", "Penk", "Sest", "Sekm"].map((day) => (
               <div key={day} className={styles.dayLabel}>
                 {day}
               </div>

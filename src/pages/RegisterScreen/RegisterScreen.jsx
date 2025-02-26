@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterScreen.css';
 import { Link, useNavigate } from 'react-router-dom';
+import {app, analytics} from '../../firebase';
 
 function RegisterScreen() {
   const [fullName, setFullName] = useState('');
