@@ -1,20 +1,23 @@
-// Import Firebase
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-// Firebase configuration using environment variables
+
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyANQ5S8US5P5X9oRF6o3SzJ2bopTs52kaw", 
+  authDomain: "barberzuk.firebaseapp.com", 
+  projectId: "barberzuk", 
+  storageBucket: "barberzuk.firebasestorage.app", 
+  messagingSenderId: "442919694774", 
+  appId: "1:442919694774:web:e400a13e6a487fa7645117", 
+  measurementId: "G-JXXMBF4C9F", 
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-export { app, analytics };
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app); 
+const auth = getAuth(app); 
+
+
+export { app, analytics, auth, createUserWithEmailAndPassword, updateProfile };

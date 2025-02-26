@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    justify-content: space-between; /* For wide screens: space between */
+    justify-content: space-between; 
     align-items: center;
     padding: 20px;
     background-color: #333;
@@ -10,7 +10,7 @@
   
   .navHomeContainer {
     flex-grow: 1;
-    text-align: center; /* Centers the BarberZuk */
+    text-align: center; 
   }
   
   .navHome {
@@ -21,17 +21,17 @@
   
   .navLinks {
     display: flex;
-    flex-direction: column; /* Stack links vertically */
+    flex-direction: column; 
     gap: 10px;
     position: absolute;
     top: 60px;
-    left: 20px; /* Positioning under the hamburger button */
+    left: 20px; 
     background-color: #333;
     padding: 10px;
     border-radius: 8px;
   }
   
-  /* Hamburger Menu Button */
+
   .menuButton {
     font-size: 30px;
     background: none;
@@ -39,19 +39,19 @@
     color: white;
     cursor: pointer;
     position: absolute;
-    left: 20px; /* Positioned to the left of the screen */
-    top: 20px; /* Some spacing from the top */
+    left: 20px; 
+    top: 20px; 
   }
   
-  /* Styling for Navigation Links */
+
   .navLinks a {
-    color: white; /* White text color */
-    text-decoration: none; /* Remove underline */
+    color: white; 
+    text-decoration: none; 
     font-size: 18px;
   }
   
   .navLinks a:hover {
-    color: #ff9800; /* Optional: Change color on hover */
+    color: #ff9800; 
   }
   
   /* Responsive Design for Mobile */
@@ -65,4 +65,19 @@
       border-radius: 8px;
     }
   }
-  
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.logoutButton:hover {
+  background-color: #e60000;
+}

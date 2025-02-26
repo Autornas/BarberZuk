@@ -1,11 +1,10 @@
-
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e9ecef;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    color: #333;
 }
-
 
 .register-container {
     width: 400px;
@@ -15,7 +14,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-
 
 .header {
     text-align: center;
@@ -31,10 +29,9 @@ body {
 .underline {
     width: 60px;
     height: 4px;
-    background-color: #007bff;
+    background-color: #333;
     margin: 10px auto;
 }
-
 
 .inputs {
     margin-bottom: 20px;
@@ -47,17 +44,18 @@ body {
 .input input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    background-color: #f7f7f7;
     transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
 .input input:focus {
-    border-color: #007bff;
+    border-color: #333;
     outline: none;
 }
-
 
 .submit-container {
     text-align: center;
@@ -66,7 +64,7 @@ body {
 .register-button {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 5px;
@@ -76,7 +74,7 @@ body {
 }
 
 .register-button:hover {
-    background-color: #0056b3;
+    background-color: #555;
 }
 
 .login-link {
@@ -85,7 +83,7 @@ body {
 }
 
 .login-link a {
-    color: #007bff;
+    color: #333;
     text-decoration: none;
 }
 
