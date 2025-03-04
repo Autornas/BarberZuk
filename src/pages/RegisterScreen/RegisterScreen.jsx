@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterScreen.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, createUserWithEmailAndPassword, updateProfile } from '../../firebase';
+import { auth, registerUser, updateUserProfile } from '../../firebase'; 
 
 function RegisterScreen() {
   const [fullName, setFullName] = useState('');
@@ -33,16 +33,11 @@ function RegisterScreen() {
     }
 
     try {
-      // Register the user with Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await registerUser(email, password);
 
-      // Update the user's profile with the full name
-      await updateProfile(userCredential.user, {
-        displayName: fullName,
-      });
+      await updateUserProfile(userCredential.user, fullName);
 
-      // After registration, navigate to the home or dashboard page
-      navigate('/web'); // Change to your desired page
+      navigate('/web'); 
 
     } catch (error) {
       setError(error.message);

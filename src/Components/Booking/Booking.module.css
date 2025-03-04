@@ -120,3 +120,19 @@
 {
   color : white;
 }
+.addTimeButton {
+  background-color: #4CAF50; 
+  color: white;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.addTimeButton:hover {
+  background-color: #45a049;
+}
+.whiteText {
+  color: white;
+}
+

@@ -11,10 +11,9 @@ function Header() {
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Set the current user
+      setUser(currentUser);
     });
 
-    // Cleanup subscription
     return () => unsubscribe();
   }, []);
 
