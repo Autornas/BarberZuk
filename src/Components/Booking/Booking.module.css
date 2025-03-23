@@ -88,8 +88,7 @@
   border: 2px solid #777;
 }
 
-
-
+/* .timeModal */
 .timeModal {
   position: relative; /* Let it be placed normally in the layout */
   top: 0;
@@ -98,11 +97,11 @@
   z-index: 999;
   display: flex;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  background-color: transparent; /* Remove the dark overlay */
 }
 
 .timeModal .timeGrid {
-  background-color: #444; /* Darker background for the modal */
+  background-color: #444; /* Darker background for the modal content */
   border-radius: 8px;
   padding: 20px;
   max-height: 400px;
@@ -110,6 +109,17 @@
   overflow-y: auto;
 }
 
+.timeModal h3 {
+  color: white; /* Make the "Available times" text white */
+}
+
+.timeModal .noAvailableTimes {
+  color: white; /* Make "No available times" text white */
+  background-color: #333; /* Darker background to match other modal sections */
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
 
 .timeModal button {
   background-color: #444;
@@ -143,7 +153,7 @@
 
 /* Add Available Times Modal */
 .addTimesModal {
-  background-color: rgba(0, 0, 0, 0.9); /* Dark overlay for Add Times Modal */
+  background-color: transparent; /* Remove dark overlay */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -220,3 +230,18 @@ button:disabled {
   max-height: 400px;
   overflow-y: auto;
 }
+.pastDate {
+  background-color: #666; /* Darker gray for past dates */
+  cursor: not-allowed; /* Disable click interaction for past dates */
+  opacity: 0.6; /* Optional: makes the past dates appear faded */
+}
+.availableDate {
+  background-color: #4CAF50; /* Green background for available dates */
+  color: white;
+  cursor: pointer; /* Ensure the cursor is a pointer to indicate interactivity */
+}
+
+.availableDate:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+}
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { format, addMonths, subMonths } from "date-fns";
+import { format, addMonths, subMonths, isBefore } from "date-fns";
 import { lt } from "date-fns/locale";
 import styles from "./Booking.module.css";
 import Button from "../UI/Button.jsx";
@@ -26,22 +26,23 @@ function BookingCalendar() {
   const [showTimes, setShowTimes] = useState(false);
   const [availableTimes, setAvailableTimes] = useState([]);
   const [newTimes, setNewTimes] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // Admin state
   const [timesCache, setTimesCache] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showAddTimesModal, setShowAddTimesModal] = useState(false);
 
+  // Check if user is an admin on initial load
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
-      setIsAdmin(checkIfAdmin());
+      setIsAdmin(checkIfAdmin()); // Check if the user is an admin
     } else {
       setIsAdmin(false);
     }
   }, []);
 
-  // Fetch available times
+  // Fetch available times for the selected date
   const fetchAvailableTimes = async (date) => {
     const dateKey = format(date, "yyyy-MM-dd");
     if (timesCache[dateKey]) {
@@ -54,15 +55,13 @@ function BookingCalendar() {
     setError(null);
     try {
       const times = await getAvailableTimes(date);
-      console.log("Fetched times for", date, ":", times); // Log fetched times
       setAvailableTimes(times);
       setTimesCache((prevCache) => ({
         ...prevCache,
         [dateKey]: times,
       }));
-      setShowTimes(true); // Show the times modal after fetching
+      setShowTimes(true);
     } catch (error) {
-      console.error("Error fetching available times:", error);
       setError("Failed to load available times. Please try again.");
       setAvailableTimes([]);
     } finally {
@@ -70,54 +69,59 @@ function BookingCalendar() {
     }
   };
 
-  const debouncedFetch = useDebouncedEffect(fetchAvailableTimes, 500); // 500ms debounce
+  const debouncedFetch = useDebouncedEffect(fetchAvailableTimes, 500);
 
+  // Handle date click and fetch available times for the clicked date
   const handleDateClick = useCallback((day) => {
     const clickedDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
     setSelectedDate(clickedDate);
     setSelectedTime(null);
-    
-    console.log("Date clicked:", clickedDate); // Log the clicked date
-    debouncedFetch(clickedDate); // Debounced fetch function call
+
+    debouncedFetch(clickedDate);
   }, [currentMonth, debouncedFetch]);
 
+  // Ensure available times are logged when availableTimes change
   useEffect(() => {
     if (availableTimes.length > 0) {
-      console.log("Available times:", availableTimes); // Log available times
+      console.log("Available times:", availableTimes);
     }
   }, [availableTimes]);
 
-  // Ensure `showTimes` is updated correctly
-  useEffect(() => {
-    console.log("showTimes state:", showTimes); // Log the showTimes state
-  }, [showTimes]);
-
+  // Handle time selection
   const handleTimeClick = (time) => {
     setSelectedTime(time);
     setShowTimes(false);
   };
 
+  // Close the modal
   const handleCloseModal = () => {
     setShowTimes(false);
     setSelectedDate(null);
   };
 
+  // Handle saving new times (admin)
   const handleAddTimes = async () => {
     if (newTimes.length === 0) return;
 
     const date = format(selectedDate, "yyyy-MM-dd");
-    await addAvailableTimes(date, newTimes);
+    try {
+      await addAvailableTimes(date, newTimes);
 
-    setTimesCache((prevCache) => ({
-      ...prevCache,
-      [date]: [...(prevCache[date] || []), ...newTimes],
-    }));
+      setTimesCache((prevCache) => ({
+        ...prevCache,
+        [date]: [...(prevCache[date] || []), ...newTimes],
+      }));
 
-    setNewTimes([]);
-    fetchAvailableTimes(date);
-    setShowAddTimesModal(false);  // Close Add Times modal after adding times
+      setNewTimes([]);
+      fetchAvailableTimes(date);
+      setShowAddTimesModal(false);
+    } catch (error) {
+      console.error("Error adding times to Firebase:", error);
+      setError("Failed to add available times. Please try again.");
+    }
   };
 
+  // Generate time options (10:00, 10:30, ..., 19:30)
   const generateTimeOptions = () => {
     const times = [];
     for (let hour = 10; hour <= 19; hour++) {
@@ -127,6 +131,7 @@ function BookingCalendar() {
     return times;
   };
 
+  // Select or deselect a time option
   const handleTimeSelection = (time) => {
     if (!newTimes.includes(time)) {
       setNewTimes([...newTimes, time]);
@@ -135,6 +140,19 @@ function BookingCalendar() {
     }
   };
 
+  // Check if the date is in the past
+  const isPastDate = (day) => {
+    const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    return isBefore(date, new Date());
+  };
+
+  // Check if the date has available times
+  const hasAvailableTimes = (day) => {
+    const dateKey = format(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day), "yyyy-MM-dd");
+    return timesCache[dateKey] && timesCache[dateKey].length > 0;
+  };
+
+  // Days in the current month and starting weekday
   const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay() + 6 % 7;
 
@@ -159,15 +177,22 @@ function BookingCalendar() {
               <div key={`empty-${index}`} className={styles.emptyCell}></div>
             ))}
 
-            {[...Array(daysInMonth)].map((_, index) => (
-              <Button
-                key={index}
-                className={selectedDate && selectedDate.getDate() === index + 1 && selectedDate.getMonth() === currentMonth.getMonth() ? styles.selectedDate : ""}
-                onClick={() => handleDateClick(index + 1)}
-              >
-                {index + 1}
-              </Button>
-            ))}
+            {[...Array(daysInMonth)].map((_, index) => {
+              const isPast = isPastDate(index + 1);
+              const isAvailable = hasAvailableTimes(index + 1);
+              return (
+                <Button
+                  key={index}
+                  className={`${selectedDate && selectedDate.getDate() === index + 1 && selectedDate.getMonth() === currentMonth.getMonth() ? styles.selectedDate : ""}
+                  ${isPast ? styles.pastDate : ""}
+                  ${isAvailable ? styles.availableDate : ""}`} // Green background for available dates
+                  onClick={!isPast ? () => handleDateClick(index + 1) : null} // Disable interaction for past dates
+                  disabled={isPast} // Disable button for past dates
+                >
+                  {index + 1}
+                </Button>
+              );
+            })}
           </div>
         </CardContent>
       </Card>
@@ -191,7 +216,7 @@ function BookingCalendar() {
                     </div>
                   ))
                 ) : (
-                  <p>No available times for this date.</p>
+                  <div className={styles.noAvailableTimes}>No available times for this date.</div>
                 )}
               </div>
               <div className={styles.modalActions}>
@@ -209,7 +234,7 @@ function BookingCalendar() {
         <div className={styles.addTimesModal}>
           <Card>
             <CardContent>
-              <h3>Add Available Times</h3>
+              <h3>Laisvi laikai</h3>
               <div className={styles.timeSelection}>
                 {generateTimeOptions().map((time) => (
                   <Button key={time} onClick={() => handleTimeSelection(time)}>
