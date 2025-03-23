@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import './RegisterScreen.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { auth, registerUser, updateUserProfile } from '../../firebase'; 
 
 function RegisterScreen() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
-    e.preventDefault(); 
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-    const nameRegex = /^[A-Za-z\s]+$/; 
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/; 
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/;
 
     if (!nameRegex.test(fullName)) {
       alert('Full Name must contain only letters.');
@@ -29,8 +31,17 @@ function RegisterScreen() {
       alert('Passwords do not match.');
       return;
     }
-   
-    navigate('/web'); 
+
+    try {
+      const userCredential = await registerUser(email, password);
+
+      await updateUserProfile(userCredential.user, fullName);
+
+      navigate('/web'); 
+
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -39,6 +50,8 @@ function RegisterScreen() {
         <h2>Register</h2>
         <div className="underline"></div>
       </div>
+
+      {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleRegister}>
         <div className="inputs">

@@ -4,7 +4,7 @@ import { FiInstagram, FiFacebook } from "react-icons/fi";
 function Footer() {
     return (
         <div className={style.footer}>
-            <p>© 2025\</p>
+            <p>© 2025</p>
             <div className={style.socialIcons}>
                 <a href="https://www.instagram.com/lzukausk/" target="_blank" rel="noopener noreferrer">
                     <FiInstagram size={24} />

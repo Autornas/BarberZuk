@@ -1,3 +1,4 @@
+/* .calendarContainer */
 .calendarContainer {
   display: flex;
   flex-direction: column;
@@ -5,11 +6,12 @@
   padding: 20px;
   max-width: 600px;
   margin: 30px auto;
-  background-color: #2e2e2e;
+  background-color: #333; /* Dark background for the container */
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* .calendarHeader */
 .calendarHeader {
   display: flex;
   justify-content: space-between;
@@ -18,24 +20,26 @@
   margin-bottom: 16px;
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: #fff; /* White text */
 }
 
 .calendarHeader button {
-  background-color: #444;
+  background-color: #555; /* Darker background for buttons */
   color: white;
-  border: none;
+  border: 1px solid #444; /* Lighter border */
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 6px;
   font-size: 16px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .calendarHeader button:hover {
-  background-color: #555;
+  background-color: #666;
+  border-color: #555;
 }
 
+/* .dayLabels */
 .dayLabels {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -47,6 +51,7 @@
   font-weight: bold;
 }
 
+/* .calendarGrid */
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -58,6 +63,7 @@
   visibility: hidden;
 }
 
+/* .calendarGrid button */
 .calendarGrid button {
   background-color: #444;
   color: white;
@@ -72,41 +78,145 @@
 
 .calendarGrid button:hover {
   background-color: #555;
+  border-color: #666;
 }
 
 .selectedDate {
-  background-color: black !important;
+  background-color: #222 !important;
   color: white !important;
   font-weight: bold;
   border: 2px solid #777;
 }
 
-.timeGrid button {
-  background-color: #444; 
-  color: white;
-  border: 1px solid #555;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.2s ease-in-out;
+
+
+.timeModal {
+  position: relative; /* Let it be placed normally in the layout */
+  top: 0;
+  width: 100%;
+  margin-top: 10px; /* Reduced space between the calendar and modal */
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
 }
 
-.timeGrid button:hover {
-  background-color: #555; 
+.timeModal .timeGrid {
+  background-color: #444; /* Darker background for the modal */
+  border-radius: 8px;
+  padding: 20px;
+  max-height: 400px;
+  width: 80%;
+  overflow-y: auto;
 }
+
 
 .timeModal button {
-  background-color: #444; 
+  background-color: #444;
   color: white;
   border: 1px solid #555;
   padding: 10px;
   cursor: pointer;
   border-radius: 6px;
   font-size: 14px;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s, border-color 0.2s;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .timeModal button:hover {
-  background-color: #555; 
+  background-color: #555;
+  border-color: #666;
+}
+
+/* .modalActions */
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.whiteText {
+  color: white;
+}
+
+/* Add Available Times Modal */
+.addTimesModal {
+  background-color: rgba(0, 0, 0, 0.9); /* Dark overlay for Add Times Modal */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 60%;
+  overflow-y: auto;
+  width: 80%;
+  z-index: 1000;
+  border-radius: 10px;
+}
+
+.addTimesModal .timeSelection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.addTimesModal button {
+  padding: 12px 18px;
+  background-color: #444;
+  color: white;
+  border: 1px solid #555;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.addTimesModal button:hover {
+  background-color: #555;
+  border-color: #666;
+}
+
+.addTimesModal .modalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addTimesModal .modalActions button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.addTimesModal h3 {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+button {
+  border-radius: 6px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Styling for disabled or non-clickable elements */
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+/* Scrollable content */
+.timeGrid {
+  max-height: 400px;
+  overflow-y: auto;
 }

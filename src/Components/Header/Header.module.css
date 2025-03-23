@@ -1,32 +1,83 @@
-.header{
+.header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     background-color: #333;
     color: white;
-}
-.Nav{
-    padding: 10px;
+    position: relative;
+  }
+  
+  .navHomeContainer {
+    flex-grow: 1;
+    text-align: center; 
+  }
+  
+  .navHome {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+  }
+  
+  .navLinks {
     display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    position: absolute;
+    top: 60px;
+    left: 20px; 
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
 
+  .menuButton {
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    left: 20px; 
+    top: 20px; 
+  }
+  
 
+  .navLinks a {
+    color: white; 
+    text-decoration: none; 
+    font-size: 18px;
+  }
+  
+  .navLinks a:hover {
+    color: #ff9800; 
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .navLinks {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: #333;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  }
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
 }
-.navHome
-{
-    color: white;
-    text-decoration: none;
-    margin: 10px;
-}
-.navAbout
-{
-    color: white;
-    text-decoration: none;
-    margin: 10px;
-}
-.navContact
-{
-    color: white;
-    text-decoration: none;
-    margin: 10px;
+
+.logoutButton:hover {
+  background-color: #e60000;
 }
